@@ -188,7 +188,7 @@ def apply_custom_css():
         /* Custom styling for better UX */
         .stTextInput > label, .stTextArea > label {
             font-weight: 600;
-            color: #1f1f1f;
+            color: #f0f0f0;
         }
         
         /* Submit button styling */
@@ -355,3 +355,4 @@ def main():
 
 if __name__ == "__main__":
     main()
+
