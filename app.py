@@ -2,7 +2,8 @@ import streamlit as st
 import re
 from firebase_admin import credentials, firestore, initialize_app
 import firebase_admin
-from typing import Dict, Tuple
+from typing import Dict, Optional, Tuple
+import json
 
 # ============================================================================
 # FIREBASE INITIALIZATION
@@ -237,12 +238,12 @@ def main():
     with st.form("project_submission_form", clear_on_submit=True):
         st.subheader("Personal Information")
         
-        # Email ID (try experimental_user first, fallback to text input)
-        try:
-            user_email = st.experimental_user.email
-            email = st.text_input("Email ID", value=user_email, disabled=True)
-        except:
-            email = st.text_input("Email ID", placeholder="user@example.com")
+        # Email ID - always use text input for deployed apps
+        email = st.text_input(
+            "Email ID",
+            placeholder="user@example.com",
+            help="Enter your valid email address"
+        )
         
         # Enrollment Number
         enrollment = st.text_input(
@@ -255,7 +256,7 @@ def main():
         # Full Name
         full_name = st.text_input(
             "Full Name",
-            placeholder="Narendra Modi",
+            placeholder="Full Name",
             help="Letters and spaces only"
         )
         
@@ -280,7 +281,7 @@ def main():
         # Source URL
         source_url = st.text_input(
             "Source URL",
-            placeholder="https://archive.ics.uci.edu/project",
+            placeholder="https://github.com/username/project",
             help="Must start with http:// or https://"
         )
         
